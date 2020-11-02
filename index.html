@@ -5,8 +5,138 @@
     <title>Resolve Development & Consulting</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="/styles/main.min.css" />
+    <meta
+      name="Description"
+      content="Resolve Development & Consulting helpt u bij het ontwerpen en bouwen van
+        moderne microservice architecturen en webapplicaties"
+    />
+    <style>
+      @font-face {
+        font-family: "Rajdhani";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: local("Rajdhani Regular"), local("Rajdhani-Regular"),
+          url(https://fonts.gstatic.com/s/rajdhani/v10/LDIxapCSOBg7S-QT7p4HM-aGW-rO.woff2)
+            format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+          U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+    </style>
+    <style>
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+        display: flex;
+      }
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        -webkit-transform: translateZ(0);
+        backface-visibility: hidden;
+      }
+      body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #001e28;
+        background: linear-gradient(#01151b, #001e28);
+        font-family: Rajdhani, sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        color: #fefefe;
+      }
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      main .logo {
+        width: 20vw;
+        min-width: 200px;
+      }
+      footer,
+      main {
+        width: 100%;
+      }
+      @media only screen and (min-width: 800px) {
+        footer,
+        main {
+          max-width: 60vw;
+        }
+        body {
+          font-size: 20px;
+        }
+      }
+      main section {
+        width: 100%;
+        padding: 0 2em;
+      }
+      main .description {
+        text-align: center;
+        margin: 4em 0 2em 0;
+      }
+      main .contact {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 2em 0 0 0;
+      }
+      main .contact .cta {
+        color: #fff;
+        background-color: #20a766;
+        background: linear-gradient(#0c7d3d, #20a766);
+        text-decoration: none;
+        padding: 1em;
+        transition: transform 0.2s;
+        transform: scale(1);
+        border: 0 none;
+      }
+      main .contact .cta:hover {
+        transform: scale(1.1);
+      }
+      footer {
+        flex: 0 1 40px;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 1em;
+      }
+      footer span {
+        display: flex;
+      }
+      footer a {
+        color: inherit;
+        text-decoration: none;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="/assets/favicon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon-16x16.png"
+    />
   </head>
   <body>
     <main>
@@ -19,13 +149,19 @@
         .
       </section>
       <section class="contact">
-        <a class="cta" href="mailto:info@resolveconsulting.nl" title="neem contact op">
+        <a
+          class="cta"
+          href="mailto:info@resolveconsulting.nl"
+          title="neem contact op"
+        >
           Neem contact op
         </a>
       </section>
     </main>
     <footer>
-      <div><a href="mailto:info@resolveconsulting.nl">info@resolveconsulting.nl</a></div>
+      <div>
+        <a href="mailto:info@resolveconsulting.nl">info@resolveconsulting.nl</a>
+      </div>
       <div>KVK: 65295897</div>
     </footer>
   </body>
