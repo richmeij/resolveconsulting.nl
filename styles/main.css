@@ -1,0 +1,110 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #001e28;
+  background: linear-gradient(#01151b, #001e28);
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #fefefe;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main .logo {
+  width: 20vw;
+  min-width: 200px;
+}
+
+main,
+footer {
+  width: 100%;
+}
+
+@media only screen and (min-width: 800px) {
+  main,
+  footer {
+    max-width: 60vw;
+  }
+
+  body {
+    font-size: 20px;
+  }
+}
+
+main section {
+  width: 100%;
+  padding: 0 2em;
+}
+
+main .description {
+  text-align: center;
+  margin: 4em 0 2em 0;
+}
+
+main .contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2em 0 0 0;
+}
+
+main .contact .cta {
+  color: #fff;
+  background-color: #20a766;
+  background: linear-gradient(#0c7d3d, #20a766);
+  text-decoration: none;
+  padding: 1em;
+  transition: transform 0.2s;
+  transform: scale(1);
+  border: 0px none;
+}
+
+main .contact .cta:hover {
+  transform: scale(1.1);
+}
+
+footer {
+  flex: 0 1 40px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1em;
+}
+
+footer span {
+  display: flex;
+}
+
+footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
