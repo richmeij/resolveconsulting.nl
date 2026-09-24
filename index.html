@@ -1,170 +1,281 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-desc-nl="Resolve Consulting ontwerpt en bouwt software voor bedrijven. Van interface tot architectuur, met aandacht voor design, UX, security en performance." data-desc-en="Resolve Consulting designs and builds software for companies. From the interface to the architecture, with care for design, UX, security, and performance.">
   <head>
     <meta charset="utf-8" />
-    <title>Resolve Consulting BV</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Resolve Consulting</title>
     <meta
-      name="Description"
-      content="Resolve Consulting BV helpt u bij het ontwerpen en bouwen van
-        moderne microservice architecturen en webapplicaties"
+      name="description"
+      content="Resolve Consulting ontwerpt en bouwt software voor bedrijven. Van interface tot architectuur, met aandacht voor design, UX, security en performance."
     />
+    <meta name="theme-color" content="#f3f5f2" />
+    <link rel="canonical" href="https://resolveconsulting.nl/" />
+    <link rel="icon" href="assets/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+    <link rel="stylesheet" href="styles.css" />
     <style>
-      @font-face {
-        font-family: "Rajdhani";
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: local("Rajdhani Regular"), local("Rajdhani-Regular"),
-          url(https://fonts.gstatic.com/s/rajdhani/v10/LDIxapCSOBg7S-QT7p4HM-aGW-rO.woff2)
-            format("woff2");
-        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
-          U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
-          U+2212, U+2215, U+FEFF, U+FFFD;
-      }
+      html[lang="en"] .t-nl { display: none !important; }
+      html:not([lang="en"]) .t-en { display: none !important; }
     </style>
-    <style>
-      body,
-      html {
-        width: 100%;
-        height: 100%;
-        display: flex;
-      }
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        -webkit-transform: translateZ(0);
-        backface-visibility: hidden;
-      }
-      body {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: #052a36;
-        background: linear-gradient(#031e27, #052a36);
-        font-family: Rajdhani, sans-serif;
-        font-weight: 400;
-        font-size: 16px;
-        color: #fefefe;
-      }
-      main {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-      main .logo {
-        width: 20vw;
-        min-width: 200px;
-        max-width: 300px;
-      }
-      footer,
-      main {
-        width: 100%;
-      }
-      @media only screen and (min-width: 800px) {
-        footer,
-        main {
-          max-width: 60vw;
-          max-width: 1200px;
-        }
-        body {
-          font-size: 20px;
-        }
-      }
-      main section {
-        width: 100%;
-        padding: 0 2em;
-      }
-      main .description {
-        text-align: center;
-        margin: 4em 0 2em 0;
-      }
-      main .contact {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 2em 0 0 0;
-      }
-      main .contact .cta {
-        color: #fff;
-        background-color: #20a766;
-        background: linear-gradient(#0c7d3d, #20a766);
-        text-decoration: none;
-        padding: 1em;
-        transition: transform 0.2s;
-        transform: scale(1);
-        border: 0 none;
-      }
-      main .contact .cta:hover {
-        transform: scale(1.1);
-      }
-      footer {
-        flex: 0 1 40px;
-        display: flex;
-        justify-content: space-between;
-        padding: 0 1em;
-      }
-      footer span {
-        display: flex;
-      }
-      footer a {
-        color: inherit;
-        text-decoration: none;
-      }
-      footer a:hover {
-        text-decoration: underline;
-      }
-    </style>
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/assets/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="96x96"
-      href="/assets/favicon-96x96.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/assets/favicon-16x16.png"
-    />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("resolve-lang");
+          var list =
+            navigator.languages && navigator.languages.length
+              ? navigator.languages
+              : [navigator.language || "en"];
+          var pref = stored === "nl" || stored === "en" ? stored : null;
+          if (!pref) {
+            pref = "en";
+            for (var i = 0; i < list.length; i++) {
+              var tag = String(list[i] || "").toLowerCase();
+              if (tag === "nl" || tag.indexOf("nl-") === 0) {
+                pref = "nl";
+                break;
+              }
+              if (tag === "en" || tag.indexOf("en-") === 0) {
+                pref = "en";
+                break;
+              }
+            }
+          }
+          document.documentElement.lang = pref;
+          var desc = document.querySelector('meta[name="description"]');
+          var text = document.documentElement.getAttribute("data-desc-" + pref);
+          if (desc && text) desc.setAttribute("content", text);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
-    <main>
-      <img class="logo" src="/assets/resolve-logo.png" alt="Resolve logo" />
-      <section class="description">
-        Resolve Consulting BV helpt u bij het ontwerpen en bouwen van
-        <strong>moderne microservice architecturen</strong>
-        en
-        <strong>webapplicaties</strong>
-        .
-      </section>
-      <section class="contact">
-        <a
-          class="cta"
-          href="mailto:info@resolveconsulting.nl"
-          title="neem contact op"
-        >
-          Neem contact op
+    <a class="skip" href="#top">
+      <span class="t-nl">Naar de inhoud</span>
+      <span class="t-en">Skip to content</span>
+    </a>
+    <div class="topbar" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="wrap bar">
+        <a class="brand" href="#top">
+          <img src="assets/mark.png" width="216" height="287" alt="" />
+          Resolve Consulting
         </a>
+        <nav aria-label="Resolve Consulting">
+          <a href="#top">Home</a>
+          <a href="#diensten">
+            <span class="t-nl">Diensten</span>
+            <span class="t-en">Services</span>
+          </a>
+          <a href="#aanpak">
+            <span class="t-nl">Aanpak</span>
+            <span class="t-en">Approach</span>
+          </a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="lang" role="group">
+          <span class="sr-only t-nl">Taal</span>
+          <span class="sr-only t-en">Language</span>
+          <button type="button" data-set-lang="nl">NL</button>
+          <button type="button" data-set-lang="en">EN</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="top" class="hero">
+        <div class="wrap">
+          <p class="kicker">
+            <span class="t-nl">Ontwerp en bouw</span>
+            <span class="t-en">Design and engineering</span>
+          </p>
+          <h1>
+            <span class="t-nl">Software voor organisaties die erop moeten kunnen bouwen.</span>
+            <span class="t-en">Software for organizations that depend on it.</span>
+          </h1>
+          <p class="lead">
+            <span class="t-nl">Resolve Consulting helpt bedrijven bij het ontwerpen en bouwen van software. Van de interface tot de architectuur daarachter, met het vakmanschap dat een product in gebruik houdt: design, UX, security en performance.</span>
+            <span class="t-en">Resolve Consulting helps companies design and build software. From the interface to the architecture behind it, with the craft that keeps a product in use: design, UX, security, and performance.</span>
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="mailto:info@resolveconsulting.nl">
+              <span class="t-nl">Neem contact op</span>
+              <span class="t-en">Get in touch</span>
+            </a>
+            <a class="quiet" href="mailto:info@resolveconsulting.nl">info@resolveconsulting.nl</a>
+          </div>
+          <ul class="stack">
+            <li>
+              <span class="t-nl">Onder meer</span>
+              <span class="t-en">Among others</span>
+            </li>
+            <li>React</li>
+            <li>Next.js</li>
+            <li>Astro</li>
+            <li>Svelte</li>
+            <li>Node.js</li>
+            <li>TypeScript</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="diensten" class="section">
+        <div class="wrap">
+          <p class="kicker">
+            <span class="t-nl">Diensten</span>
+            <span class="t-en">Services</span>
+          </p>
+          <h2>
+            <span class="t-nl">Wat we bouwen</span>
+            <span class="t-en">What we build</span>
+          </h2>
+          <p class="intro">
+            <span class="t-nl">Drie terreinen die samen het product dragen. De techniek volgt het product.</span>
+            <span class="t-en">Three areas that carry the product together. The technology follows the product.</span>
+          </p>
+          <div class="services">
+            <article class="service">
+              <p class="num">01</p>
+              <div>
+                <h3>Frontend</h3>
+                <p>
+                  <span class="t-nl">Interfaces die helder blijven in gebruik en hun snelheid houden als het product groeit, bijvoorbeeld met React, Next.js, Astro of Svelte.</span>
+                  <span class="t-en">Interfaces that stay clear in use and keep their speed as the product grows, for example with React, Next.js, Astro, or Svelte.</span>
+                </p>
+              </div>
+            </article>
+            <article class="service">
+              <p class="num">02</p>
+              <div>
+                <h3>Backend</h3>
+                <p>
+                  <span class="t-nl">API's en diensten die aansluiten op de interface en op de systemen eromheen, bijvoorbeeld met Node.js en TypeScript.</span>
+                  <span class="t-en">APIs and services that fit the interface and the systems around it, for example with Node.js and TypeScript.</span>
+                </p>
+              </div>
+            </article>
+            <article class="service">
+              <p class="num">03</p>
+              <div>
+                <h3>
+                  <span class="t-nl">Architectuur</span>
+                  <span class="t-en">Architecture</span>
+                </h3>
+                <p>
+                  <span class="t-nl">Een opzet die meegroeit met de organisatie. Duidelijke grenzen tussen onderdelen, keuzes die uitlegbaar blijven, en een fundament waar later op voortgebouwd kan worden.</span>
+                  <span class="t-en">A structure that grows with the organization. Clear boundaries between parts, choices that stay explainable, and a foundation that later work can build on.</span>
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="aanpak" class="section">
+        <div class="wrap">
+          <p class="kicker">
+            <span class="t-nl">Aanpak</span>
+            <span class="t-en">Approach</span>
+          </p>
+          <h2>
+            <span class="t-nl">Wat het werk goed maakt</span>
+            <span class="t-en">What makes the work hold up</span>
+          </h2>
+          <p class="intro">
+            <span class="t-nl">Een werkend product is het begin. Dit nemen we mee in ontwerp en bouw.</span>
+            <span class="t-en">A working product is the start. We carry this through design and build.</span>
+          </p>
+          <div class="principles">
+            <article>
+              <svg class="pip" viewBox="0 0 64 36" aria-hidden="true">
+                <path d="M8 34 L20 8 L32 34 Z" />
+                <path d="M24 34 L40 4 L56 34 Z" />
+                <path d="M40 34 L50 16 L60 34 Z" />
+              </svg>
+              <h3>
+                <span class="t-nl">Design en UX</span>
+                <span class="t-en">Design and UX</span>
+              </h3>
+              <p>
+                <span class="t-nl">Structuur, ritme en interactie worden samen met de bouw bepaald, vanuit de manier waarop mensen het product gebruiken.</span>
+                <span class="t-en">Structure, rhythm, and interaction are decided together with the build, from the way people use the product.</span>
+              </p>
+            </article>
+            <article>
+              <svg class="pip" viewBox="0 0 48 44" aria-hidden="true">
+                <path d="M8 16 L24 4 L40 16 L24 40 Z" />
+                <path d="M14 18 L34 18 L24 36 Z" />
+              </svg>
+              <h3>
+                <span class="t-nl">Beveiliging</span>
+                <span class="t-en">Security</span>
+              </h3>
+              <p>
+                <span class="t-nl">Toegang, gegevens en afhankelijkheden horen bij het ontwerp. Ze blijven onderdeel van de keuzes terwijl het systeem groeit.</span>
+                <span class="t-en">Access, data, and dependencies belong in the design. They stay part of the choices as the system grows.</span>
+              </p>
+            </article>
+            <article>
+              <svg class="pip" viewBox="0 0 64 36" aria-hidden="true">
+                <path d="M4 32 L26 6 L32 6 L12 32 Z" />
+                <path d="M20 32 L42 6 L50 6 L28 32 Z" />
+                <path d="M36 32 L56 8 L62 8 L44 32 Z" />
+              </svg>
+              <h3>Performance</h3>
+              <p>
+                <span class="t-nl">Snelheid zit in de architectuur en in de interface. We letten op wat iemand in het gebruik merkt, en bouwen daarop.</span>
+                <span class="t-en">Speed lives in the architecture and in the interface. We pay attention to what someone notices in use, and we build for that.</span>
+              </p>
+            </article>
+            <article>
+              <svg class="pip" viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M24 4 L28 18 L24 16 L20 18 Z" />
+                <path d="M44 24 L30 28 L32 24 L30 20 Z" />
+                <path d="M24 44 L20 30 L24 32 L28 30 Z" />
+                <path d="M4 24 L18 20 L16 24 L18 28 Z" />
+                <path d="M24 18 L30 24 L24 30 L18 24 Z" />
+              </svg>
+              <h3>AI</h3>
+              <p>
+                <span class="t-nl">AI gebruiken we waar het het product of de bouw aantoonbaar verder brengt. Modellen en automatisering vallen onder dezelfde eisen als de rest van het systeem.</span>
+                <span class="t-en">We use AI where it clearly moves the product or the build forward. Models and automation answer to the same standard as the rest of the system.</span>
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="band">
+        <div class="wrap contact-grid">
+          <div>
+            <p class="kicker">Contact</p>
+            <h2>
+              <span class="t-nl">Schrijf ons</span>
+              <span class="t-en">Write to us</span>
+            </h2>
+            <p class="intro">
+              <span class="t-nl">Een bericht naar info@resolveconsulting.nl is genoeg. Vertel wat je wilt bouwen, of waar de huidige software tegenaan loopt.</span>
+              <span class="t-en">A note to info@resolveconsulting.nl is enough. Tell us what you want to build, or where the current software is stuck.</span>
+            </p>
+            <p class="contact-action">
+              <a class="button" href="mailto:info@resolveconsulting.nl">info@resolveconsulting.nl</a>
+            </p>
+          </div>
+          <div class="legal">
+            <p class="kicker">Resolve Consulting B.V.</p>
+            <p class="kvk">KvK 81266952</p>
+          </div>
+        </div>
       </section>
     </main>
-    <footer>
-      <div>
-        <a href="mailto:info@resolveconsulting.nl">info@resolveconsulting.nl</a>
+
+    <footer class="site-footer">
+      <div class="wrap footer-line">
+        <p>Resolve Consulting B.V.</p>
+        <p>KvK 81266952</p>
+        <p><a href="mailto:info@resolveconsulting.nl">info@resolveconsulting.nl</a></p>
       </div>
-      <div>KVK: 81266952</div>
     </footer>
+    <script src="site.js"></script>
   </body>
 </html>
