@@ -21,7 +21,7 @@ function page(file, href, storage) {
   const events = {};
   const document = {
     documentElement: root, title: '',
-    querySelector: () => ({ setAttribute() {} }),
+    querySelector: selector => selector === 'meta[name="description"]' ? { setAttribute() {} } : null,
     querySelectorAll: selector => selector === '[data-set-lang]' ? buttons : selector === 'a[href]' ? links : [],
     getElementById: () => null,
     addEventListener(name, callback) { events[name] = callback; }

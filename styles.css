@@ -245,26 +245,8 @@ h3 {
   text-underline-offset: 0.18em;
 }
 
-.stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem 0;
-  margin: 3.25rem 0 0;
-  padding: 1.25rem 0 0;
-  border-top: 1px solid var(--line);
-  list-style: none;
-}
 
-.stack li {
-  color: var(--muted);
-  font-size: 0.98rem;
-}
 
-.stack li:not(:last-child)::after {
-  content: "·";
-  margin: 0 0.8rem;
-  color: var(--green);
-}
 
 .section {
   padding: clamp(3.5rem, 8vw, 6rem) 0;
@@ -433,10 +415,6 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; color:
 .quiet { font-size: .88rem; font-weight: 500; text-decoration: none; }
 .quiet:hover { text-decoration: underline; text-underline-offset: 5px; }
 .quiet > span:last-child { margin-left: .4rem; }
-.stack { grid-column: 1 / -1; align-items: center; justify-content: space-between; margin-top: 4.5rem; padding: 1.4rem 0; border-bottom: 1px solid var(--line); }
-.stack li { font-weight: 600; font-size: .9rem; }
-.stack li:first-child { font-size: .72rem; font-weight: 400; text-transform: uppercase; letter-spacing: .12em; }
-.stack li:not(:last-child)::after { content: none; }
 .system-art { grid-column: 2; grid-row: 1 / 5; position: relative; align-self: center; height: 475px; min-width: 0; background: radial-gradient(ellipse at center, #d6e7cf 0%, #edf1e6 52%, transparent 73%); isolation: isolate; }
 .art-grid { position: absolute; inset: 0; background-image: linear-gradient(#14372809 1px, transparent 1px), linear-gradient(90deg,#14372809 1px,transparent 1px); background-size: 32px 32px; mask-image: radial-gradient(ellipse,black 25%,transparent 72%); }
 .art-caption, .art-footnote { position: absolute; left: 7%; right: 3%; display: flex; align-items: center; gap: .5rem; font-family: 'Consolas', monospace; font-size: .6rem; letter-spacing: .09em; color: var(--muted); }
@@ -548,8 +526,6 @@ h2 { font-size: clamp(2.2rem,4vw,3.6rem); letter-spacing: -.055em; max-width: 22
   h1 { max-width: 19ch; font-size: clamp(3rem,7.5vw,4.5rem); }
   .hero .lead { max-width: 35rem; }
   .system-art { grid-column: 1; grid-row: auto; width: min(100%,470px); height: 460px; justify-self: center; margin-top: 2.5rem; }
-  .stack { margin-top: 2.5rem; gap: 1rem 1.5rem; justify-content: flex-start; }
-  .stack li:first-child { flex-basis: 100%; }
   .services { gap: .8rem; }
   .service { padding: .65rem .65rem 1.4rem; }
   .service-visual { height: 175px; }
@@ -683,4 +659,56 @@ h2 { font-size: clamp(2.2rem,4vw,3.6rem); letter-spacing: -.055em; max-width: 22
   .detail-steps { margin-top: 2rem; }
   .detail-steps .num { margin-bottom: 1rem; }
   .related-links { flex-direction: column; }
+}
+
+/* A seamless client reel, with a static fallback when motion is disabled. */
+.clients { padding: 2.75rem 0 0; }
+.clients-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+.clients .kicker { margin: 0; max-width: none; color: var(--muted); }
+.clients-viewport { mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent); overflow-x: auto; border-bottom: 1px solid var(--line); padding: .3rem 0 2rem; }
+.clients-track { display: flex; width: max-content; }
+.client-logos { display: flex; align-items: center; list-style: none; gap: 2rem; padding: 0 2rem 0 0; margin: 0; flex-shrink: 0; }
+.client-logos li { flex: 0 0 176px; width: 176px; }
+.client-logos a { display: flex; align-items: center; justify-content: center; min-height: 80px; padding: .5rem; border-radius: 5px; }
+.client-logos a:hover { background: var(--green-soft); }
+.client-logos a:focus-visible { outline-offset: -2px; }
+.client-logo { display: block; width: 100%; max-width: 160px; height: auto; max-height: 46px; object-fit: contain; opacity: .72; }
+.client-logo--cb { max-width: 180px; }
+.client-logo--dhl { max-width: 130px; }
+.client-logo--enexis { max-width: 145px; }
+.client-logo--frengo { max-width: 115px; }
+.clients.is-animated .clients-viewport { overflow: hidden; }
+.clients.is-animated .clients-track { animation: client-reel 38s linear infinite; }
+.clients-viewport:hover .clients-track { animation-play-state: paused; }
+/* Keep every original link reachable without chasing moving targets. */
+.clients.is-animated .clients-viewport:focus-within { overflow-x: auto; mask-image: none; }
+.clients.is-animated .clients-viewport:focus-within .clients-track { animation: none; }
+.clients-viewport:focus-within .client-logos[aria-hidden="true"] { display: none; }
+@keyframes client-reel { to { transform: translateX(-50%); } }
+@media (max-width: 600px) {
+  .client-logos { gap: 1.5rem; padding-right: 1.5rem; }
+  .client-logos li { flex-basis: 160px; width: 160px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .clients.is-animated .clients-track { animation: none; }
+  .clients.is-animated .clients-viewport { overflow-x: auto; }
+  .client-logos[aria-hidden="true"] { display: none; }
+}
+
+/* Technology supports the service offering, without competing with client logos. */
+.technology-ribbon { margin-top: 2.75rem; padding: 2rem 0; }
+.technology-label { color: var(--ink); line-height: 1.25; max-width: 44rem; }
+.technology-intro { max-width: 44rem; margin: 0 0 2rem; color: var(--muted); font-size: 1rem; }
+.stack { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; width: 100%; margin: 0; padding: 0; list-style: none; }
+.stack li { display: inline-flex; align-items: center; gap: .75rem; color: var(--ink); font-size: 1.15rem; font-weight: 600; }
+.stack img { display: block; width: 26px; height: 26px; object-fit: contain; }
+.hero + .clients { padding-top: 4rem; }
+@media (min-width: 601px) and (max-width: 840px) {
+  .stack { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .stack { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+  .stack li { font-size: 1rem; gap: .6rem; }
+  .stack img { width: 24px; height: 24px; }
+  .hero + .clients { padding-top: 2.75rem; }
 }
