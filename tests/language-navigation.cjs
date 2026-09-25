@@ -1,10 +1,11 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
+const decodeAttribute = value => value.replace(/&quot;/g, '"').replace(/&#x27;|&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 
 function page(file, href, storage) {
   const html = fs.readFileSync(file, 'utf8');
-  const rootAttrs = Object.fromEntries([...html.match(/<html\b[^>]*>/)[0].matchAll(/([\w-]+)="([^"]*)"/g)].map(m => [m[1], m[2]]));
+  const rootAttrs = Object.fromEntries([...html.match(/<html\b[^>]*>/)[0].matchAll(/([\w-]+)="([^"]*)"/g)].map(m => [m[1], decodeAttribute(m[2])]));
   const root = { lang: 'nl', getAttribute: name => rootAttrs[name] || null };
   const buttons = ['nl', 'en'].map(lang => ({
     attrs: { 'data-set-lang': lang }, handlers: {},
@@ -89,10 +90,10 @@ for (const file of ['index.html', 'frontend.html', 'backend.html', 'architectuur
 console.log('PASS: Open Graph and Twitter tags match each page title, description, and canonical URL.');
 
 function shareDocument(html) {
-  const rootAttrs = Object.fromEntries([...html.match(/<html\b[^>]*>/)[0].matchAll(/([\w-]+)="([^"]*)"/g)].map(m => [m[1], m[2]]));
+  const rootAttrs = Object.fromEntries([...html.match(/<html\b[^>]*>/)[0].matchAll(/([\w-]+)="([^"]*)"/g)].map(m => [m[1], decodeAttribute(m[2])]));
   const root = { lang: 'nl', getAttribute: name => rootAttrs[name] || null };
   const metas = [...html.matchAll(/<meta\b([^>]*)\/?>/g)].map(m => {
-    const attrs = Object.fromEntries([...m[1].matchAll(/([\w:-]+)="([^"]*)"/g)].map(a => [a[1], a[2]]));
+    const attrs = Object.fromEntries([...m[1].matchAll(/([\w:-]+)="([^"]*)"/g)].map(a => [a[1], decodeAttribute(a[2])]));
     return { attrs, getAttribute: name => attrs[name] || null, setAttribute(name, value) { attrs[name] = value; } };
   });
   const document = {
@@ -123,7 +124,7 @@ function shareDocument(html) {
 }
 const englishShare = shareDocument(fs.readFileSync('architectuur.html', 'utf8'));
 assert.equal(englishShare.root.lang, 'en');
-assert.deepEqual(englishShare.content('meta[property="og:title"], meta[name="twitter:title"]'), ['Architecture | Resolve Consulting', 'Architecture | Resolve Consulting']);
+assert.deepEqual(englishShare.content('meta[property="og:title"], meta[name="twitter:title"]'), ['Strategy & architecture | Resolve Consulting', 'Strategy & architecture | Resolve Consulting']);
 assert.deepEqual(englishShare.content('meta[property="og:locale"]'), ['en_US']);
-assert.ok(englishShare.content('meta[property="og:description"]')[0].startsWith('Good architecture'));
+assert.ok(englishShare.content('meta[property="og:description"]')[0].startsWith('We connect your organizational goals'));
 console.log('PASS: switching language updates the share title, description, and locale.');

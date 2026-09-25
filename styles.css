@@ -724,3 +724,12 @@ h2 { font-size: clamp(2.2rem,4vw,3.6rem); letter-spacing: -.055em; max-width: 22
   .stack img { width: 24px; height: 24px; }
   .hero + .clients { padding-top: 2.75rem; }
 }
+
+/* Strategy provides the shared direction for the four quality principles. */
+.principles .strategy-principle { grid-column: 1 / -1; padding-bottom: 2rem; border-bottom: 1px solid #c8d5c5; }
+.principles .strategy-principle h3 { font-size: 1.4rem; }
+.principles .strategy-principle p { max-width: 42rem; font-size: 1rem; }
+#aanpak .strategy-principle .pip { width: 40px; height: 40px; }
+@media (max-width: 600px) {
+  .principles .strategy-principle { padding-top: 0; border-top: 0; border-bottom: 0; padding-bottom: 0; }
+}
