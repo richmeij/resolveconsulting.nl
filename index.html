@@ -8,7 +8,7 @@
       name="description"
       content="Resolve Consulting ontwerpt en bouwt software voor bedrijven. Van interface tot architectuur, met aandacht voor design, UX, security en performance."
     />
-    <meta name="theme-color" content="#f3f5f2" />
+    <meta name="theme-color" content="#f7f8f2" />
     <link rel="canonical" href="https://resolveconsulting.nl/" />
     <link rel="icon" href="assets/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
@@ -18,36 +18,7 @@
       html[lang="en"] .t-nl { display: none !important; }
       html:not([lang="en"]) .t-en { display: none !important; }
     </style>
-    <script>
-      (function () {
-        try {
-          var stored = localStorage.getItem("resolve-lang");
-          var list =
-            navigator.languages && navigator.languages.length
-              ? navigator.languages
-              : [navigator.language || "en"];
-          var pref = stored === "nl" || stored === "en" ? stored : null;
-          if (!pref) {
-            pref = "en";
-            for (var i = 0; i < list.length; i++) {
-              var tag = String(list[i] || "").toLowerCase();
-              if (tag === "nl" || tag.indexOf("nl-") === 0) {
-                pref = "nl";
-                break;
-              }
-              if (tag === "en" || tag.indexOf("en-") === 0) {
-                pref = "en";
-                break;
-              }
-            }
-          }
-          document.documentElement.lang = pref;
-          var desc = document.querySelector('meta[name="description"]');
-          var text = document.documentElement.getAttribute("data-desc-" + pref);
-          if (desc && text) desc.setAttribute("content", text);
-        } catch (e) {}
-      })();
-    </script>
+    <script src="language.js?v=1"></script>
   </head>
   <body>
     <a class="skip" href="#top">
@@ -90,19 +61,28 @@
             <span class="t-en">Design and engineering</span>
           </p>
           <h1>
-            <span class="t-nl">Software voor organisaties die erop moeten kunnen bouwen.</span>
-            <span class="t-en">Software for organizations that depend on it.</span>
+            <span class="t-nl">Doordacht ontworpen.<br /><em>Gebouwd om op te vertrouwen.</em></span>
+            <span class="t-en">Thoughtfully designed.<br /><em>Built to depend on.</em></span>
           </h1>
           <p class="lead">
-            <span class="t-nl">Resolve Consulting helpt bedrijven bij het ontwerpen en bouwen van software. Van de interface tot de architectuur daarachter, met het vakmanschap dat een product in gebruik houdt: design, UX, security en performance.</span>
-            <span class="t-en">Resolve Consulting helps companies design and build software. From the interface to the architecture behind it, with the craft that keeps a product in use: design, UX, security, and performance.</span>
+            <span class="t-nl">Van de eerste interactie tot de architectuur erachter. We ontwerpen en bouwen software die helder werkt, snel blijft en met je organisatie meegroeit.</span>
+            <span class="t-en">From the first interaction to the architecture behind it. We design and build software that feels clear, stays fast, and grows with your organization.</span>
           </p>
           <div class="hero-actions">
             <a class="button" href="mailto:info@resolveconsulting.nl">
               <span class="t-nl">Neem contact op</span>
               <span class="t-en">Get in touch</span>
             </a>
-            <a class="quiet" href="mailto:info@resolveconsulting.nl">info@resolveconsulting.nl</a>
+            <a class="quiet" href="#diensten"><span class="t-nl">Ontdek wat we bouwen</span><span class="t-en">Explore what we build</span> <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="system-art" aria-hidden="true">
+            <div class="art-grid"></div>
+            <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+            <div class="art-caption"><span class="status-dot"></span><span class="t-nl">HET GEHEEL</span><span class="t-en">THE WHOLE PICTURE</span></div>
+            <div class="system-layer architecture-layer"><div class="layer-label"><span class="t-nl">ARCHITECTUUR</span><span class="t-en">ARCHITECTURE</span></div><div class="architecture-nodes"><i></i><b></b><i></i><b></b><i></i></div></div>
+            <div class="system-layer backend-layer"><div class="layer-label"><span class="t-nl">GEGEVENSVERWERKING</span><span class="t-en">BACKEND</span></div><div class="data-lines"><i></i><i></i><i></i></div><div class="data-flow"><span></span><span></span><span></span><span></span></div></div>
+            <div class="system-layer interface-layer"><div class="layer-label"><span class="t-nl">GEBRUIKERSINTERFACE</span><span class="t-en">INTERFACE</span><span class="window-dots">•••</span></div><div class="mock-interface"><div class="mock-sidebar"><i></i><i></i><i></i></div><div class="mock-main"><div class="mock-heading"></div><div class="mock-subheading"></div><div class="mock-chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mock-bottom"><i></i><i></i></div></div></div></div>
+            <div class="art-footnote"><span class="t-nl">Elk detail. Eén geheel.</span><span class="t-en">Every detail. One system.</span></div>
           </div>
           <ul class="stack">
             <li>
@@ -136,6 +116,7 @@
           <div class="services">
             <article class="service">
               <p class="num">01</p>
+              <div class="service-visual frontend-visual" aria-hidden="true"><div class="mini-window"><div class="mini-top">•••</div><div class="mini-layout"><i></i><div><b></b><b></b><span></span></div></div></div><span class="visual-tag"><span class="t-nl">INTERACTIE → INTERFACE</span><span class="t-en">INTERACTION → INTERFACE</span></span></div>
               <div>
                 <h3>Frontend</h3>
                 <p>
@@ -143,9 +124,11 @@
                   <span class="t-en">Interfaces that stay clear in use and keep their speed as the product grows, for example with React, Next.js, Astro, or Svelte.</span>
                 </p>
               </div>
+              <a class="service-link" href="frontend.html"><span class="t-nl">Meer over frontend</span><span class="t-en">More about frontend</span> <span aria-hidden="true">↗</span></a>
             </article>
             <article class="service">
               <p class="num">02</p>
+              <div class="service-visual backend-visual" aria-hidden="true"><div class="api-flow"><span><span class="t-nl">IN</span><span class="t-en">GET</span></span><i></i><strong>{ }</strong><i></i><span><span class="t-nl">UIT</span><span class="t-en">200</span></span></div><span class="visual-tag"><span class="t-nl">VRAAG → ANTWOORD</span><span class="t-en">REQUEST → RESPONSE</span></span></div>
               <div>
                 <h3>Backend</h3>
                 <p>
@@ -153,9 +136,11 @@
                   <span class="t-en">APIs and services that fit the interface and the systems around it, for example with Node.js and TypeScript.</span>
                 </p>
               </div>
+              <a class="service-link" href="backend.html"><span class="t-nl">Meer over backend</span><span class="t-en">More about backend</span> <span aria-hidden="true">↗</span></a>
             </article>
             <article class="service">
               <p class="num">03</p>
+              <div class="service-visual architecture-visual" aria-hidden="true"><div class="mini-layers"><i></i><i></i><i></i></div><span class="visual-tag"><span class="t-nl">STRUCTUUR → GROEI</span><span class="t-en">STRUCTURE → SCALE</span></span></div>
               <div>
                 <h3>
                   <span class="t-nl">Architectuur</span>
@@ -166,6 +151,7 @@
                   <span class="t-en">A structure that grows with the organization. Clear boundaries between parts, choices that stay explainable, and a foundation that later work can build on.</span>
                 </p>
               </div>
+              <a class="service-link" href="architectuur.html"><span class="t-nl">Meer over architectuur</span><span class="t-en">More about architecture</span> <span aria-hidden="true">↗</span></a>
             </article>
           </div>
         </div>
@@ -250,8 +236,8 @@
           <div>
             <p class="kicker">Contact</p>
             <h2>
-              <span class="t-nl">Schrijf ons</span>
-              <span class="t-en">Write to us</span>
+              <span class="t-nl">Iets goeds begint<br />met een gesprek.</span>
+              <span class="t-en">Great things start<br />with a conversation.</span>
             </h2>
             <p class="intro">
               <span class="t-nl">Een bericht naar info@resolveconsulting.nl is genoeg. Vertel wat je wilt bouwen, of waar de huidige software tegenaan loopt.</span>
@@ -262,6 +248,7 @@
             </p>
           </div>
           <div class="legal">
+            <img class="contact-mark" src="assets/mark.png" width="216" height="287" alt="" />
             <p class="kicker">Resolve Consulting B.V.</p>
             <p class="kvk">KvK 81266952</p>
           </div>
@@ -276,6 +263,6 @@
         <p><a href="mailto:info@resolveconsulting.nl">info@resolveconsulting.nl</a></p>
       </div>
     </footer>
-    <script src="site.js"></script>
+    <script src="site.js?v=3"></script>
   </body>
 </html>

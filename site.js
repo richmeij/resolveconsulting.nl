@@ -1,17 +1,8 @@
 (function () {
-  var key = "resolve-lang";
   var root = document.documentElement;
 
   function apply(lang, persist) {
-    root.lang = lang;
-    if (persist) {
-      try {
-        localStorage.setItem(key, lang);
-      } catch (e) {}
-    }
-    var desc = document.querySelector('meta[name="description"]');
-    var text = root.getAttribute("data-desc-" + lang);
-    if (desc && text) desc.setAttribute("content", text);
+    window.resolveLanguage.set(lang, persist);
     var buttons = document.querySelectorAll("[data-set-lang]");
     for (var i = 0; i < buttons.length; i++) {
       var on = buttons[i].getAttribute("data-set-lang") === lang;
@@ -27,6 +18,16 @@
       apply(this.getAttribute("data-set-lang"), true);
     });
   }
+
+  // Refresh restored pages and other open tabs when the shared choice changes.
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) apply(window.resolveLanguage.stored() || root.lang, true);
+  });
+  window.addEventListener("storage", function (event) {
+    if (event.key === "resolve-lang" && (event.newValue === "nl" || event.newValue === "en")) {
+      apply(event.newValue, true);
+    }
+  });
 
   var ids = ["top", "diensten", "aanpak", "contact"];
 
@@ -46,6 +47,23 @@
     }
   }
 
-  spy();
-  window.addEventListener("scroll", spy, { passive: true });
+  if (root.getAttribute("data-page") !== "service") {
+    spy();
+    window.addEventListener("scroll", spy, { passive: true });
+  }
+
+  // Content stays visible without JavaScript; motion is only an enhancement.
+  if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var entrances = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("arrived");
+          entrances.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".service, .principles article").forEach(function (element) {
+      entrances.observe(element);
+    });
+  }
 })();
