@@ -14,7 +14,10 @@ per file or unavailable. A manual choice is also saved when browser storage allo
 
 The service cards link to `frontend.html`, `backend.html`, and `architectuur.html`.
 These pages share `styles.css`, `language.js`, and `site.js`, with Dutch and English content in each
-HTML file. Each service page has its own title, description, and canonical URL.
+HTML file. Each service page has its own title, description, canonical URL, and Open Graph tags.
+Link previews use `assets/og.png` (1200×630). WhatsApp and similar apps read the tags from the HTML
+and do not run JavaScript, so the tags in the file are Dutch, matching the default page. `language.js`
+updates the title, description, and `og:locale` after a visitor switches language.
 The examples are illustrative scenarios, not client cases. No build step is needed.
 
 Run the language navigation regression checks with `node tests/language-navigation.cjs`.

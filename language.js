@@ -29,6 +29,12 @@
     return "en";
   }
 
+  function setContent(selector, value) {
+    if (!value) return;
+    var nodes = document.querySelectorAll(selector);
+    for (var i = 0; i < nodes.length; i++) nodes[i].setAttribute("content", value);
+  }
+
   function setLanguage(lang, persist) {
     if (!valid(lang)) return;
     root.lang = lang;
@@ -37,6 +43,10 @@
     var description = document.querySelector('meta[name="description"]');
     var text = root.getAttribute("data-desc-" + lang);
     if (description && text) description.setAttribute("content", text);
+    // Link previews read the static Dutch tags. Keep them aligned when the page language changes.
+    setContent('meta[property="og:description"], meta[name="twitter:description"]', text);
+    setContent('meta[property="og:title"], meta[name="twitter:title"]', title || document.title);
+    setContent('meta[property="og:locale"]', lang === "nl" ? "nl_NL" : "en_US");
     if (persist) {
       try { localStorage.setItem(key, lang); } catch (e) {}
       // Keep reloads and copied URLs consistent with an explicit selection.
