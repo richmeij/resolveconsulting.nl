@@ -426,9 +426,26 @@ a.button[href^="mailto:"]::after, a.button[href^="http"]::after { content: '↗'
 .orbit-two { width: 280px; height: 280px; top: 95px; left: 18%; }
 .system-layer { position: absolute; width: 77%; border-radius: 9px; transform: rotate(-9deg) skewY(3deg); box-shadow: 0 18px 35px #173b2520; animation: assemble .95s cubic-bezier(.2,.7,.2,1) both; }
 @media (hover: hover) {
-  .system-layer { scale: 1; transition: scale .2s ease, box-shadow .2s ease; }
-  .system-layer:hover { z-index: 2; scale: 1.02; box-shadow: 0 26px 46px #173b2533; }
+  /* Crossfade above the stack instead of abruptly switching its paint order.
+     Original cards stay in place, keeping their hover areas stable. */
+  .system-layer.layer-preview {
+    z-index: 2;
+    pointer-events: none;
+    animation: none;
+    opacity: 0;
+    scale: 1;
+    translate: 0 0;
+    transition: opacity .38s ease, scale .5s cubic-bezier(.22,1,.36,1), translate .5s cubic-bezier(.22,1,.36,1), box-shadow .5s ease;
+  }
+  .system-layer.layer-preview.is-active {
+    opacity: 1;
+    scale: 1.02;
+    translate: 0 -6px;
+    box-shadow: 0 26px 46px #173b2533;
+  }
 }
+.layer-preview { display: none; }
+@media (hover: hover) { .layer-preview { display: block; } }
 .layer-label { display: flex; justify-content: space-between; align-items: center; padding: 13px 17px; font-family: 'Consolas', monospace; font-size: .6rem; letter-spacing: .09em; border-bottom: 1px solid #ffffff24; }
 .architecture-layer { top: 221px; left: 20%; height: 187px; background: var(--forest); color: #d1ef80; animation-delay: .1s; }
 .architecture-nodes { display: flex; align-items: center; position: absolute; bottom: 22px; left: 25px; right: 25px; }

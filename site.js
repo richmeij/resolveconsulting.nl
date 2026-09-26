@@ -52,6 +52,20 @@
     window.addEventListener("scroll", spy, { passive: true });
   }
 
+  // Fade a visual copy over the stack without changing the original hit areas.
+  document.querySelectorAll(".system-art-scale > .system-layer").forEach(function (layer) {
+    var preview = layer.cloneNode(true);
+    preview.classList.add("layer-preview");
+    preview.setAttribute("aria-hidden", "true");
+    layer.parentNode.appendChild(preview);
+    layer.addEventListener("pointerenter", function () {
+      preview.classList.add("is-active");
+    });
+    layer.addEventListener("pointerleave", function () {
+      preview.classList.remove("is-active");
+    });
+  });
+
   // Content stays visible without JavaScript; motion is only an enhancement.
   if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     var entrances = new IntersectionObserver(function (entries) {
